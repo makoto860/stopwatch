@@ -1,21 +1,16 @@
-/*ストップウォッチの課題の提出です。レビューお願いします。*/
+/*ストップウォッチの課題の提出です。ミリ秒からの設定とストップを押した後、再度スタートできるように非活性化の箇所を修正しました。レビューお願いします。*/
 $(function () {
   let sec = 0;
   let min = 0;
   let hour = 0;
   
-  let timer;
-
   /*スタート*/
   $('#start').click(function() {
-    /*0:0:0:0から*/
-    sec = 0;
-    min = 0;
-    
+  
     $('#time').html('0:0:0:0');
-    timer = setInterval(countup, 1000);
+    timer = setInterval(countup, 15);
 
-    $(this).prop('disabled', true);
+    $('#start').prop('disabled', false);
     $('#stop,#reset').prop('disabled', false);
   });
 
@@ -24,19 +19,13 @@ $(function () {
     /*一時停止*/
     clearInterval(timer);
 
-    $(this).prop('disabled', true);
+   $('#stop').prop('disabled', false);
   });
 
   /*リセット*/
   $('#reset').click(function() {
-    sec = 0;
-    min = 0;
-    
     $('#time').html('0:0:0:0');
     clearInterval(timer);
-
-    $('#stop,').prop('disabled', true);
-    $('#start').prop('disabled', false);
   });
 
 /*カウントアップ*/
@@ -59,6 +48,6 @@ $(function () {
     min_number = (min);
     hour_number = (hour);
 
-    $('#time').html( '0' + ':' + hour_number  + ':' + min_number + ':' + sec_number);
+    $('#time').html( '0' + ':' + hour_number + ':' + min_number  + ':' + sec_number  );
   }
 });
